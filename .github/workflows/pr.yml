@@ -19,5 +19,9 @@ jobs:
         node-version: '10.x'
     - name: Install Dependencies
       run: npm install
+    - name: Install NR1 CLI
+      run: curl -s https://cli.nr-ext.net/installer.sh | sudo bash
+    - name: NR1 Nerdpack Build
+      run: nr1 nerdpack:build
     - name: ESLinting
       run: npm run eslint-check
