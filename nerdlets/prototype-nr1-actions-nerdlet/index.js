@@ -4,6 +4,6 @@ import React from 'react';
 
 export default class PrototypeNr1ActionsNerdletNerdlet extends React.Component {
   render() {
-    return <h1>Hello, prototype-nr1-actions-nerdlet Nerdlet v2!</h1>;
+    return <h1>Hello, prototype-nr1-actions-nerdlet Nerdlet v3!</h1>;
   }
 }
