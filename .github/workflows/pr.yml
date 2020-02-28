@@ -14,10 +14,12 @@ jobs:
     # Checkout base repo
     - name: Checkout
       uses: actions/checkout@v2
-      
+    
     # List contents of repo
-    - name: Content list
-      uses: enricomarino/actions@v2
+    - name: echo List directory
+      run:  echo ls
+    - name: List directory
+      run:  ls
       
     # This would checkout all the submodules, even though we only need the one for _this_ PR
     - name: Checkout submodules
@@ -26,8 +28,10 @@ jobs:
         args: git submodule update --init --recursive
     
     # List contents of repo
-    - name: Content list
-      uses: enricomarino/actions@v2
+    - name: echo List directory
+      run:  echo ls
+    - name: List directory
+      run:  ls
             
     # This would checkout submodule `foo` (if we can get foo...)
     #- uses: Mushus/checkout-submodule@v1
