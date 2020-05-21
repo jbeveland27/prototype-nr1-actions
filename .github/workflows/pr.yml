@@ -1,83 +1,215 @@
-name: CI
+name: Pull Request
 
-on: 
+on:
+  # push:
+  #   branches:
+  #     - master
+  # - v*
+  # paths:
+  #   - 'apps/**'
+  # tags:
+  #   - v*
   pull_request:
-    branches: 
+    branches:
       - master
+    # paths:
+    #   - 'apps/**'
+
+  repository_dispatch:
+    types: [pull-request]
 
 jobs:
-  build:
-
+  # Pull_Request
+  checkout-and-build-pr:
+    name: checkout-and-build-pr
     runs-on: ubuntu-latest
-    
+    # if: github.event_name != 'pull_request' # github.event_name == "push" ?
     steps:
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    
-    # Checkout base repo
-    - name: Checkout
-      uses: actions/checkout@v2
-    
-    
-    # List contents of repo
-    - name: List directory
-      run:  ls -la
-      
-    # This would checkout all the submodules, even though we only need the one for _this_ PR
-    - name: Checkout submodules
-      uses: srt32/git-actions@v0.0.3
-      with:
-        args: git submodule update --init --recursive
-    
-    # List contents of repo
-    - name: List directory
-      run:  ls -la
-            
-    # This would checkout submodule `foo` (if we can get foo...)
-    #- uses: Mushus/checkout-submodule@v1
-    #  with:
-    #    submodulePath: ./foo
-    
-    - name: files-present-action
-      uses: JJ/files-present-action@releases/v1
-      with:
-        # Array describing the files
-        files: "README.md, .prettierrc.js, .eslintrc.js, .gitignore, package.json, LICENSE, THIRD_PARTY_NOTICES.md, CODE_OF_CONDUCT.md, cla.md, .github/ISSUE_TEMPLATE/bug_report.md, .github/ISSUE_TEMPLATE/enhancement.md, nr1.json, catalog/config.json"
-    
-    - name: Setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    
-    - name: Install Dependencies
-      run: npm install
-    
-    - name: Install NR1 CLI
-      run: curl -s https://cli.nr-ext.net/installer.sh | sudo bash
-    
-    - name: NR1 Nerdpack Build
-      run: nr1 nerdpack:build
-    
-    # Validate Ability to publish code (Issue #2)
-    # Requires API key
-    #- name: NR1 Nerdpack Build
-    #  run: nr1 nerdpack:publish --dry-run
-    
-    #- name: Publish and deploy Nerdpack
-    #  env:
-    #    NR1_API_KEY: ${{ secrets.DEMOTRON_V2_API_KEY }}
-    #    NR1_REGION: us
-    #  run: |
-    #    nr1 profiles:add --name workflow --api-key "$NR1_API_KEY" --region "$NR1_REGION" &&
-    #    nr1 nerdpack:publish --dry-run
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-#        nr1 nerdpack:publish --profile=workflow &&
-#        nr1 nerdpack:deploy --channel="$NR1_DEPLOY_CHANNEL"
-    
-    - name: ESLinting
-      run: npm run eslint-check
-    
-    - name: Test Code
-      run: npm test
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v1
+        env:
+          cache-name: node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install NR1 CLI
+        run: curl -s https://cli.nr-ext.net/installer.sh | sudo bash
+
+      - name: NR1 Nerdpack Build
+        run: |
+          nr1 nerdpack:build
+          nr1 nerdpack:validate
+
+      #TODO: use actions/artifact-upload to share files between jobs?
+
+  eslint:
+    name: eslint
+    needs: checkout-and-build-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v1
+        env:
+          cache-name: node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run eslint-check and generate report
+        run: |
+          npm run eslint-check -- --output-file eslint_report.json --format json
+
+      - name: Annotate Lint Results
+        uses: ataylorme/eslint-annotate-action@1.0.4
+        with:
+          repo-token: ${{} secrets.GITHUB_TOKEN }}
+          report-json: eslint_report.json
+
+      # Custom Action
+      # - name: Run eslint
+      #   uses: ./.github/actions/eslint-action
+      #   with:
+      #     path: ${{ env.SUBMODULE_NAME }}
+
+  test:
+    name: test
+    needs: checkout-and-build-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v1
+        env:
+          cache-name: node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run npm test
+        run: npm test
+
+  # Validate all files needed for open source nerdpack are present
+  validate-nerdpack:
+    name: validate nerdpack
+    needs: checkout-and-build-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install NR1 CLI
+        run: |
+          curl -s https://cli.nr-ext.net/installer.sh | sudo bash
+          nr1 profiles:add --name nr1-apps-us --api-key ${{ secrets.NR1_APPS_KEY_US }} --region us
+      - name: Validate Nerdpack Schema
+        run: |
+          nr1 nerdpack:validate
+
+      # TODO: Use custom nerdpack-oss-file-validation-action instead
+      - name: Validate Open Source Files
+        run: |
+          rootDir=./
+
+          declare -a files=(
+            "README.md"
+            ".prettierrc.js"
+            ".eslintrc.js"
+            ".gitignore"
+            "package.json"
+            "package-lock.json"
+
+            "LICENSE"
+            "THIRD_PARTY_NOTICES.md"
+            "CODE_OF_CONDUCT.md"
+            "CONTRIBUTING.md"
+            "cla.md"
+            ".github/ISSUE_TEMPLATE/bug_report.md"
+            ".github/ISSUE_TEMPLATE/enhancement.md"
+            ".github/workflows/pr.yml"
+            ".github/workflows/release.yml"
+            "nr1.json"
+            ".releaserc"
+            "third_party_manifest.json"
+          )
+          # README.md, .prettierrc.js, .eslintrc.js, .gitignore, package.json, LICENSE, THIRD_PARTY_NOTICES.md, CODE_OF_CONDUCT.md, cla.md, .github/ISSUE_TEMPLATE/bug_report.md, .github/ISSUE_TEMPLATE/enhancement.md, nr1.json, icon.png, catalog/config.json
+          for FILE in "${files[@]}"
+          do
+            if [ ! -f "${rootDir}$FILE" ]; then
+              printf "\n"
+              echo "Error: $FILE is missing from Nerdpack"
+              printf "\n"
+              exit 1
+            else
+              echo "Found "${rootDir}$FILE
+            fi
+          done
+  # Alert if there's been a change to package.json or workflow files? sanity-check type thing
+  # job-test-pr:
+  #   name: test
+  #   needs: checkout-and-build-pr
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v2
+  #     - name: Setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: '10.x'
+  #     - name: Cache node_modules
+  #       id: cache-node-modules
+  #       uses: actions/cache@v1
+  #       env:
+  #         cache-name: node-modules
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-${{ env.cache-name }}-
+  #     - name: Install Dependencies
+  #       run: npm ci
+  #     # TODO: Convert these steps to docker-based action
+  #     - name: Additional checks on pr from fork
+  #       run: |
+  #         echo "Validating nothing is awry, maybe we look for changes to package.json or .github/workflows/ci.yml"
