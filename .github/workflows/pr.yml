@@ -1,19 +1,9 @@
 name: Pull Request
 
 on:
-  # push:
-  #   branches:
-  #     - master
-  # - v*
-  # paths:
-  #   - 'apps/**'
-  # tags:
-  #   - v*
   pull_request:
     branches:
       - master
-    # paths:
-    #   - 'apps/**'
 
   repository_dispatch:
     types: [pull-request]
@@ -23,7 +13,6 @@ jobs:
   checkout-and-build-pr:
     name: checkout-and-build-pr
     runs-on: ubuntu-latest
-    # if: github.event_name != 'pull_request' # github.event_name == "push" ?
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -53,9 +42,8 @@ jobs:
       - name: NR1 Nerdpack Build
         run: |
           nr1 nerdpack:build
-          nr1 nerdpack:validate
 
-      #TODO: use actions/artifact-upload to share files between jobs?
+      #TODO: Is it possible to use actions/artifact-upload to share files between jobs?
 
   eslint:
     name: eslint
@@ -94,12 +82,6 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           report-json: eslint_report.json
-
-      # Custom Action
-      # - name: Run eslint
-      #   uses: ./.github/actions/eslint-action
-      #   with:
-      #     path: ${{ env.SUBMODULE_NAME }}
 
   test:
     name: test

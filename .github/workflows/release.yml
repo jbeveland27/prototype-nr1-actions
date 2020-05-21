@@ -78,6 +78,11 @@ jobs:
 
       - name: Generate Third Party Notices
         run: |
+          if [ ! -f "third_party_manifest.json" ]; then
+            echo "Error: third_party_manifest.json is missing. Must generate using the newrelic-oss-cli."
+            exit 1
+          fi
+
           # latest commit
           LATEST_COMMIT=$(git rev-parse HEAD)
 
@@ -96,8 +101,7 @@ jobs:
             # git add THIRD_PARTY_NOTICES.md
 
             # git commit -m 'chore: update third-party manifest and notices [skip ci]'
-            # git push origin ${CIRCLE_BRANCH} 
-
+            # git push origin ${GITHUB_REF#/refs/heads/} 
           else
             echo "No change in package.json, not regenerating third-party notices"
           fi
