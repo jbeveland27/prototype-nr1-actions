@@ -1,5 +1,9 @@
 name: CI
 
+env:
+  THIRD_PARTY_GIT_AUTHOR_EMAIL: opensource+template-nerdpack@newrelic.com
+  THIRD_PARTY_GIT_AUTHOR_NAME: Actionbot
+
 on:
   push:
     branches:
@@ -91,8 +95,8 @@ jobs:
 
           #TODO: use correct branch/settings for commiting files back
           if [ $LAST_CHANGED_COMMIT = $LATEST_COMMIT ]; then
-            # git config user.email "${THIRD_PARTY_GIT_AUTHOR_EMAIL}"
-            # git config user.name "${THIRD_PARTY_GIT_AUTHOR_NAME}"
+            git config user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
+            git config user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
 
             oss third-party manifest
             oss third-party notices
