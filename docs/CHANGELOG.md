@@ -1,3 +1,31 @@
+# [1.3.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.2.0...v1.3.0) (2020-05-21)
+
+
+### Bug Fixes
+
+* but for real this time ([8caea51](https://github.com/jbeveland27/prototype-nr1-actions/commit/8caea51e3ed5e505878bd9925995ce5f27d91299))
+* need git config user ([e961f77](https://github.com/jbeveland27/prototype-nr1-actions/commit/e961f77bc3f3f38019a25dd2604ee6345bf1dec9))
+* seeing if this will checkout lastest commit on master ([c0b4061](https://github.com/jbeveland27/prototype-nr1-actions/commit/c0b406190a6beb00859d20c922bb07b1502b04d0))
+
+
+### Features
+
+* test committing updated third-party manifest/notice files ([959d421](https://github.com/jbeveland27/prototype-nr1-actions/commit/959d421ae5c30cfabcbe2c21ffc25275b1827986))
+
+# [1.2.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.1.0...v1.2.0) (2020-05-21)
+
+
+### Features
+
+* adding third-party-manifest.json ([11a0fba](https://github.com/jbeveland27/prototype-nr1-actions/commit/11a0fbaca75e1bb9286f475d3c7d5f238c4acd00))
+
+# [1.1.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.2...v1.1.0) (2020-05-21)
+
+
+### Features
+
+* updating workflows ([4f0d974](https://github.com/jbeveland27/prototype-nr1-actions/commit/4f0d974bd191c64b00c8ac6b5f04c84648006073))
+
 ## [1.0.2](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.1...v1.0.2) (2020-05-21)
 
 
