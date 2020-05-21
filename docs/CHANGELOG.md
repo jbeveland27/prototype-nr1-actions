@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.1.0...v1.2.0) (2020-05-21)
+
+
+### Features
+
+* adding third-party-manifest.json ([11a0fba](https://github.com/jbeveland27/prototype-nr1-actions/commit/11a0fbaca75e1bb9286f475d3c7d5f238c4acd00))
+
 # [1.1.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.2...v1.1.0) (2020-05-21)
 
 
