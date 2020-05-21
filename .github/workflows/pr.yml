@@ -143,7 +143,6 @@ jobs:
       - name: Install NR1 CLI
         run: |
           curl -s https://cli.nr-ext.net/installer.sh | sudo bash
-          nr1 profiles:add --name nr1-apps-us --api-key ${{ secrets.NR1_APPS_KEY_US }} --region us
       - name: Validate Nerdpack Schema
         run: |
           nr1 nerdpack:validate
