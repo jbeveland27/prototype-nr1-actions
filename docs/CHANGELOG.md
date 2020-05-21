@@ -1,0 +1,27 @@
+# 1.0.0 (2020-05-21)
+
+
+### Bug Fixes
+
+* list contents of dir ([edb60aa](https://github.com/jbeveland27/prototype-nr1-actions/commit/edb60aaea279c25e1a5c292c3819fc71dcef2ac7))
+* syntax error ([55dafd0](https://github.com/jbeveland27/prototype-nr1-actions/commit/55dafd04b271e412ae9f94618351fbbb3e7dece3))
+* syntax errors ([9a5bb91](https://github.com/jbeveland27/prototype-nr1-actions/commit/9a5bb91cbe88a12374289dd1256de140358d769f))
+* testing push on master ([131b5ce](https://github.com/jbeveland27/prototype-nr1-actions/commit/131b5ce215c1af943e1d6153e50ac9732f8769bd))
+
+
+### Features
+
+* add files present action ([ca20e0e](https://github.com/jbeveland27/prototype-nr1-actions/commit/ca20e0e1ceec43ea2107aa17e177166c329e6a6d))
+* add initial pull-request workflow ([b2a4a8b](https://github.com/jbeveland27/prototype-nr1-actions/commit/b2a4a8b256d1cb6b71891db2363c0691ab36e87d))
+* add nr1 cli install and nerdpack:build ([a653fed](https://github.com/jbeveland27/prototype-nr1-actions/commit/a653fed41686e8ef57150c108c040db0ca33397e))
+* added icon and deleted needing piece from package.json to test ([58095e6](https://github.com/jbeveland27/prototype-nr1-actions/commit/58095e603e61d3ee7e9cd66c5eaaeee813f18fde))
+* added icon to root ([932e212](https://github.com/jbeveland27/prototype-nr1-actions/commit/932e2128b78f6297a210d13555402a7039d275c3))
+* adding ls for repo content ([43215d8](https://github.com/jbeveland27/prototype-nr1-actions/commit/43215d83cf599224bf4ccb5d3e87ea5d3ba25ee8))
+* adding missing script back ([158787a](https://github.com/jbeveland27/prototype-nr1-actions/commit/158787aaf8f89c4c6dbd6789bd6848cf5be9aa68))
+* adding submodule checkout ([d56d743](https://github.com/jbeveland27/prototype-nr1-actions/commit/d56d7439342e9badb2395244eda988eaa324cb65))
+* adding workflows for GH Actions ([176c8ac](https://github.com/jbeveland27/prototype-nr1-actions/commit/176c8ac4bb863a0241fa186b050b411bae5929b6))
+* console log GitHub context ([78a4482](https://github.com/jbeveland27/prototype-nr1-actions/commit/78a44826199741caedbccb856e9baa0e47376ee9))
+* testing out multi-line command ([fb7ddb4](https://github.com/jbeveland27/prototype-nr1-actions/commit/fb7ddb4c5e4cc760665820642b404a2511092aef))
+* trying again w/ multi-line string ([d8aba58](https://github.com/jbeveland27/prototype-nr1-actions/commit/d8aba58021685f8f241cb53e4cd0dc3c74b12715))
+* updating to use pr instead of push ([20d210e](https://github.com/jbeveland27/prototype-nr1-actions/commit/20d210e57ad769681d6c178ed448420d6b1075a3))
+* version update ([#1](https://github.com/jbeveland27/prototype-nr1-actions/issues/1)) ([5c6beea](https://github.com/jbeveland27/prototype-nr1-actions/commit/5c6beea35fdb8a3ffebece6afc0f093ae19fcde2))
