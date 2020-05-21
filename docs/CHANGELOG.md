@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.0...v1.0.1) (2020-05-21)
+
+
+### Bug Fixes
+
+* syntax error ([e9e9e52](https://github.com/jbeveland27/prototype-nr1-actions/commit/e9e9e521c8a3c454d85f85963b1df9047cf3cb69))
+
 # 1.0.0 (2020-05-21)
 
 
