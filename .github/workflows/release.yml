@@ -80,7 +80,7 @@ jobs:
       - name: Generate Third Party Notices
         run: |
           if [ ! -f "third_party_manifest.json" ]; then
-            echo "::error::third_party_manifest.json is missing. Must generate using the newrelic-oss-cli."
+            echo "Error: third_party_manifest.json is missing. Must generate using the newrelic-oss-cli."
             exit 1
           fi
 
