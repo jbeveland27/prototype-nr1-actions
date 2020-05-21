@@ -91,7 +91,7 @@ jobs:
       - name: Annotate Lint Results
         uses: ataylorme/eslint-annotate-action@1.0.4
         with:
-          repo-token: ${{} secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           report-json: eslint_report.json
 
       # Custom Action
