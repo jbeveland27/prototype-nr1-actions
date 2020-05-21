@@ -9,7 +9,6 @@ on:
     types: [pull-request]
 
 jobs:
-  # Pull_Request
   checkout-and-build-pr:
     name: checkout-and-build-pr
     runs-on: ubuntu-latest
@@ -114,6 +113,7 @@ jobs:
         run: npm test
 
   # Validate all files needed for open source nerdpack are present
+  # TODO: Custom validation for the catalog files (if present)
   validate-nerdpack:
     name: validate nerdpack
     needs: checkout-and-build-pr
@@ -160,14 +160,16 @@ jobs:
           do
             if [ ! -f "${rootDir}$FILE" ]; then
               printf "\n"
-              echo "Error: $FILE is missing from Nerdpack"
+              echo "::error::$FILE is missing from Nerdpack"
               printf "\n"
               exit 1
             else
               echo "Found "${rootDir}$FILE
             fi
           done
-  # Alert if there's been a change to package.json or workflow files? sanity-check type thing
+
+  # Alert if there's been a change to package.json or workflow files? Just a sanity-check of
+  # things we need to pay attention to
   # job-test-pr:
   #   name: test
   #   needs: checkout-and-build-pr
