@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.2...v1.1.0) (2020-05-21)
+
+
+### Features
+
+* updating workflows ([4f0d974](https://github.com/jbeveland27/prototype-nr1-actions/commit/4f0d974bd191c64b00c8ac6b5f04c84648006073))
+
 ## [1.0.2](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.1...v1.0.2) (2020-05-21)
 
 
