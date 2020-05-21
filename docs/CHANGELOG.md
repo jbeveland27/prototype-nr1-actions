@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.1...v1.0.2) (2020-05-21)
+
+
+### Bug Fixes
+
+* allow eslint to fail on purpose ([322ae53](https://github.com/jbeveland27/prototype-nr1-actions/commit/322ae537399723f9b16f4b773746c602481da17b))
+
 ## [1.0.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.0.0...v1.0.1) (2020-05-21)
 
 
