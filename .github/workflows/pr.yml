@@ -122,12 +122,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Install NR1 CLI
-        run: |
-          curl -s https://cli.nr-ext.net/installer.sh | sudo bash
-      - name: Validate Nerdpack Schema
-        run: |
-          nr1 nerdpack:validate
       
       - name: list files
         run: ls -la
@@ -171,6 +165,12 @@ jobs:
         #       echo "Found "${rootDir}$FILE
         #     fi
         #   done
+      - name: Install NR1 CLI
+        run: |
+          curl -s https://cli.nr-ext.net/installer.sh | sudo bash
+      - name: Validate Nerdpack Schema
+        run: |
+          nr1 nerdpack:validate
 
   # Alert if there's been a change to package.json or workflow files? Just a sanity-check of
   # things we need to pay attention to
