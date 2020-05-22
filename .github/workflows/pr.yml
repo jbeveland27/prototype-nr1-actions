@@ -128,6 +128,9 @@ jobs:
       - name: Validate Nerdpack Schema
         run: |
           nr1 nerdpack:validate
+      
+      - name: list files
+        run: ls -la
 
       # TODO: Use custom nerdpack-oss-file-validation-action instead
       - name: Validate Open Source Files
