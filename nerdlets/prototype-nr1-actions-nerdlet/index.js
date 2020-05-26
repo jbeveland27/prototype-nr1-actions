@@ -4,6 +4,7 @@ import React from 'react';
 
 export default class PrototypeNr1ActionsNerdletNerdlet extends React.Component {
   render() {
+    const eslintFail = 'test';
     return <h1>Hello, prototype-nr1-actions-nerdlet Nerdlet v1.0.2!</h1>;
   }
 }
