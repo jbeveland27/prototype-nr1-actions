@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.3.0...v1.4.0) (2020-05-22)
+
+
+### Features
+
+* adding catalog documentation ([4f38e20](https://github.com/jbeveland27/prototype-nr1-actions/commit/4f38e207ebb87d52d8d7ca658ea7fed2ee4752e6))
+
 # [1.3.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.2.0...v1.3.0) (2020-05-21)
 
 
