@@ -122,52 +122,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      # TODO: Use custom nerdpack-oss-file-validation-action instead
+      - name: Validate Open Source Files
+        uses: newrelic/validate-nerdpack-action@v1
       - name: Install NR1 CLI
         run: |
           curl -s https://cli.nr-ext.net/installer.sh | sudo bash
       - name: Validate Nerdpack Schema
         run: |
           nr1 nerdpack:validate
-
-      # TODO: Use custom nerdpack-oss-file-validation-action instead
-      - name: Validate Open Source Files
-        uses: newrelic/validate-nerdpack-action@feat/test-action
-        # run: |
-        #   rootDir=./
-
-        #   declare -a files=(
-        #     "README.md"
-        #     ".prettierrc.js"
-        #     ".eslintrc.js"
-        #     ".gitignore"
-        #     "package.json"
-        #     "package-lock.json"
-
-        #     "LICENSE"
-        #     "THIRD_PARTY_NOTICES.md"
-        #     "CODE_OF_CONDUCT.md"
-        #     "CONTRIBUTING.md"
-        #     "cla.md"
-        #     ".github/ISSUE_TEMPLATE/bug_report.md"
-        #     ".github/ISSUE_TEMPLATE/enhancement.md"
-        #     ".github/workflows/pr.yml"
-        #     ".github/workflows/release.yml"
-        #     "nr1.json"
-        #     ".releaserc"
-        #     "third_party_manifest.json"
-        #   )
-        #   # README.md, .prettierrc.js, .eslintrc.js, .gitignore, package.json, LICENSE, THIRD_PARTY_NOTICES.md, CODE_OF_CONDUCT.md, cla.md, .github/ISSUE_TEMPLATE/bug_report.md, .github/ISSUE_TEMPLATE/enhancement.md, nr1.json, icon.png, catalog/config.json
-        #   for FILE in "${files[@]}"
-        #   do
-        #     if [ ! -f "${rootDir}$FILE" ]; then
-        #       printf "\n"
-        #       echo "::error::$FILE is missing from Nerdpack"
-        #       printf "\n"
-        #       exit 1
-        #     else
-        #       echo "Found "${rootDir}$FILE
-        #     fi
-        #   done
 
   # Alert if there's been a change to package.json or workflow files? Just a sanity-check of
   # things we need to pay attention to
