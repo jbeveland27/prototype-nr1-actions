@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.4.0...v1.4.1) (2020-05-27)
+
+
+### Bug Fixes
+
+* use eslint-check outcome ([ac6bd9f](https://github.com/jbeveland27/prototype-nr1-actions/commit/ac6bd9f01146c3a650376eec805a739163d05569))
+
 # [1.4.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.3.0...v1.4.0) (2020-05-22)
 
 
