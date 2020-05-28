@@ -80,7 +80,7 @@ jobs:
       - name: Generate Third Party Notices
         id: generate-notices
         env:
-          GITHUB_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+          NEWRELIC_BOT_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
         run: |
           if [ ! -f "third_party_manifest.json" ]; then
             echo "::error::third_party_manifest.json is missing. Must generate using the newrelic-oss-cli."
@@ -97,7 +97,7 @@ jobs:
             git config user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
             git config user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
             # Update origin with token
-            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/newrelic/nr1-browser-analyzer.git
+            git remote set-url origin https://x-access-token:${NEWRELIC_BOT_TOKEN}@github.com/newrelic/nr1-browser-analyzer.git
 
             oss third-party manifest
             oss third-party notices
