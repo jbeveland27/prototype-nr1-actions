@@ -106,6 +106,7 @@ jobs:
             git add THIRD_PARTY_NOTICES.md
 
             git commit -m 'chore: update third-party manifest and notices [skip ci]'
+            git push origin ${GITHUB_REF#/refs/heads/} 
             echo "::set-output name=commit::true"
           else
             echo "No change in package.json, not regenerating third-party notices"
@@ -147,5 +148,5 @@ jobs:
 
       - name: Run semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
         run: npx semantic-release
