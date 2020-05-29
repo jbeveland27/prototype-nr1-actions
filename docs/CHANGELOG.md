@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.7.0...v1.8.0) (2020-05-29)
+
+
+### Bug Fixes
+
+* showing results ([c987a75](https://github.com/jbeveland27/prototype-nr1-actions/commit/c987a751768a9b569a9af78c90b2469e352e4d49))
+
+
+### Features
+
+* show output of github-script actions ([765d297](https://github.com/jbeveland27/prototype-nr1-actions/commit/765d29779e4dd141ae5713d55403e62a2b611e3f))
+
 # [1.7.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.6.0...v1.7.0) (2020-05-29)
 
 
