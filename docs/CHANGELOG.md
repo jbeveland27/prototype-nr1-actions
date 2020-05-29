@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.6.0...v1.7.0) (2020-05-29)
+
+
+### Features
+
+* switch release job over to use github-script actions ([e607a28](https://github.com/jbeveland27/prototype-nr1-actions/commit/e607a28ed941b3c1060d31a34377e082ee4a9aae))
+
 # [1.6.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.5.0...v1.6.0) (2020-05-29)
 
 
