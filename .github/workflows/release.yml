@@ -125,18 +125,6 @@ jobs:
               required_pull_request_reviews: null
             })
             console.log("Result:", result)
-      #   run: |
-      #     ownerWithRepo="jbeveland27/prototype-nr1-actions"
-      #     branch="master"
-      #     curl -X PUT \
-      #         -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-      #         -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-      #         -d '{
-      #             "restrictions": null,
-      #             "required_status_checks": null,
-      #             "enforce_admins": null,
-      #             "required_pull_request_reviews": null
-      #         }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
       
       - name: Push Commit
         if: steps.generate-notices.outputs.commit == 'true'
@@ -164,20 +152,6 @@ jobs:
               }
             })
             console.log("Result:", result)
-        # run: |
-        #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
-        #   branch="master"
-        #   curl -X PUT \
-        #       -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-        #       -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-        #       -d '{
-        #           "restrictions": null,
-        #           "required_pull_request_reviews": {
-        #             "required_approving_review_count": 1
-        #           },
-        #           "required_status_checks": null,
-        #           "enforce_admins": null
-        #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
       
   job-generate-release:
     runs-on: ubuntu-latest
@@ -227,18 +201,6 @@ jobs:
               required_pull_request_reviews: null
             })
             console.log("Result:", result)
-        # run: |
-        #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
-        #   branch="master"
-        #   curl -X PUT \
-        #       -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-        #       -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-        #       -d '{
-        #           "restrictions": null,
-        #           "required_status_checks": null,
-        #           "enforce_admins": null,
-        #           "required_pull_request_reviews": null
-        #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
 
       - name: Run semantic-release
         env:
@@ -265,19 +227,3 @@ jobs:
               }
             })
             console.log("Result:", result)
-        # run: |
-        #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
-        #   branch="master"
-        #   curl -X PUT \
-        #       -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-        #       -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-        #       -d '{
-        #           "restrictions": null,
-        #           "required_pull_request_reviews": {
-        #             "dismiss_stale_reviews": false,
-        #             "require_code_owner_reviews": false,
-        #             "required_approving_review_count": 1
-        #           },
-        #           "required_status_checks": null,
-        #           "enforce_admins": null
-        #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
