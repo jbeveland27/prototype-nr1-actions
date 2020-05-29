@@ -115,12 +115,10 @@ jobs:
       
       - name: Push Commit
         if: steps.generate-notices.outputs.commit == 'true'
-        env:
-          GITHUB_TOKEN: ${{ env.NEWRELIC_BOT_TOKEN }}
         uses: ad-m/github-push-action@v0.6.0
-        # with:
-        #   github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
-        #   force: true
+        with:
+          github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+          force: true
 
   job-generate-release:
     runs-on: ubuntu-latest
