@@ -112,18 +112,33 @@ jobs:
       
       - name: Temporarily disable "required_pull_request_reviews" branch protection
         if: always()
-        run: |
-          ownerWithRepo="jbeveland27/prototype-nr1-actions"
-          branch="master"
-          curl -X PUT \
-              -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-              -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-              -d '{
-                  "restrictions": null,
-                  "required_status_checks": null,
-                  "enforce_admins": null,
-                  "required_pull_request_reviews": null
-              }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
+        uses: actions/github-script@v1
+        with:
+          github-token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+          previews: luke-cage-preview
+          script: |
+            console.log(JSON.stringify(context));
+            github.repos.updateBranchProtection({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: 'master',
+              required_status_checks: null,
+              restrictions: null,
+              enforce_admins: null,
+              required_pull_request_reviews: null
+            })
+      #   run: |
+      #     ownerWithRepo="jbeveland27/prototype-nr1-actions"
+      #     branch="master"
+      #     curl -X PUT \
+      #         -H 'Accept: application/vnd.github.luke-cage-preview+json' \
+      #         -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
+      #         -d '{
+      #             "restrictions": null,
+      #             "required_status_checks": null,
+      #             "enforce_admins": null,
+      #             "required_pull_request_reviews": null
+      #         }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
       
       - name: Push Commit
         if: steps.generate-notices.outputs.commit == 'true'
@@ -133,22 +148,37 @@ jobs:
       
       - name: Re-enable "required_pull_request_reviews" branch protection
         if: always()
-        run: |
-          ownerWithRepo="jbeveland27/prototype-nr1-actions"
-          branch="master"
-          curl -X PUT \
-              -H 'Accept: application/vnd.github.luke-cage-preview+json' \
-              -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
-              -d '{
-                  "restrictions": null,
-                  "required_pull_request_reviews": {
-                    "dismiss_stale_reviews": false,
-                    "require_code_owner_reviews": false,
-                    "required_approving_review_count": 1
-                  },
-                  "required_status_checks": null,
-                  "enforce_admins": null
-              }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
+        uses: actions/github-script@v1
+        with:
+          github-token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+          previews: luke-cage-preview
+          script: |
+            console.log(JSON.stringify(context));
+            github.repos.updateBranchProtection({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: 'master',
+              required_status_checks: null,
+              restrictions: null,
+              enforce_admins: null,
+              required_pull_request_reviews: {
+                required_approving_review_count: 1
+              }
+            })
+        # run: |
+        #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
+        #   branch="master"
+        #   curl -X PUT \
+        #       -H 'Accept: application/vnd.github.luke-cage-preview+json' \
+        #       -H 'Authorization: Token ${{ secrets.NEWRELIC_BOT_TOKEN }}' \
+        #       -d '{
+        #           "restrictions": null,
+        #           "required_pull_request_reviews": {
+        #             "required_approving_review_count": 1
+        #           },
+        #           "required_status_checks": null,
+        #           "enforce_admins": null
+        #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
 
   job-generate-release:
     runs-on: ubuntu-latest
