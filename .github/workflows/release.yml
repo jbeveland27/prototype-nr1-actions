@@ -81,6 +81,7 @@ jobs:
         id: generate-notices
         env:
           NEWRELIC_BOT_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
         run: |
           if [ ! -f "third_party_manifest.json" ]; then
             echo "::error::third_party_manifest.json is missing. Must generate using the newrelic-oss-cli."
@@ -97,7 +98,7 @@ jobs:
             git config user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
             git config user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
             # Update origin with token
-            git remote set-url origin https://jbeveland27:${NEWRELIC_BOT_TOKEN}@github.com/jbeveland27/prototype-nr1-actions.git
+            # git remote set-url origin https://jbeveland27:${NEWRELIC_BOT_TOKEN}@github.com/jbeveland27/prototype-nr1-actions.git
 
             oss third-party manifest
             oss third-party notices
@@ -112,11 +113,13 @@ jobs:
             echo "No change in package.json, not regenerating third-party notices"
           fi
       
-      # - name: Push Commit
-      #   if: steps.generate-notices.outputs.commit == 'true'
-      #   uses: ad-m/github-push-action@v0.5.0
-      #   with:
-      #     github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+      - name: Push Commit
+        if: steps.generate-notices.outputs.commit == 'true'
+        env:
+          GITHUB_TOKEN: ${{ env.NEWRELIC_BOT_TOKEN }}
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
 
   job-generate-release:
     runs-on: ubuntu-latest
