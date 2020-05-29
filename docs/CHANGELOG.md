@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.8.1...v1.8.2) (2020-05-29)
+
+
+### Bug Fixes
+
+* removing previous curl-based commands for updating branch protection ([b3fd0e3](https://github.com/jbeveland27/prototype-nr1-actions/commit/b3fd0e3bd0e24cb8b549adbe1ee3a0eaf1bf2799))
+
 ## [1.8.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.8.0...v1.8.1) (2020-05-29)
 
 
