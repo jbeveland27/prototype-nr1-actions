@@ -8,8 +8,8 @@ on:
     types: [semantic-release]
 
 env:
-  THIRD_PARTY_GIT_AUTHOR_EMAIL: jeveland@newrelic.com
-  THIRD_PARTY_GIT_AUTHOR_NAME: jbeveland27
+  THIRD_PARTY_GIT_AUTHOR_EMAIL: opensource+template-nerdpack@newrelic.com
+  THIRD_PARTY_GIT_AUTHOR_NAME: Newrelic-bot
 
 jobs:
   job-checkout-and-build:
@@ -94,8 +94,6 @@ jobs:
           if [ $LAST_CHANGED_COMMIT = $LATEST_COMMIT ]; then
             git config user.email "${{ env.THIRD_PARTY_GIT_AUTHOR_EMAIL }}"
             git config user.name "${{ env.THIRD_PARTY_GIT_AUTHOR_NAME }}"
-            # Update origin with token
-            # git remote set-url origin https://jbeveland27:${NEWRELIC_BOT_TOKEN}@github.com/jbeveland27/prototype-nr1-actions.git
 
             oss third-party manifest
             oss third-party notices
@@ -104,13 +102,13 @@ jobs:
             git add THIRD_PARTY_NOTICES.md
 
             git commit -m 'chore: update third-party manifest and notices [skip ci]'
-            # git push origin ${GITHUB_REF#/refs/heads/} 
             echo "::set-output name=commit::true"
           else
             echo "No change in package.json, not regenerating third-party notices"
           fi
       
       - name: Temporarily disable "required_pull_request_reviews" branch protection
+        id: disable-branch-protection
         if: always()
         uses: actions/github-script@v1
         with:
@@ -139,6 +137,10 @@ jobs:
       #             "required_pull_request_reviews": null
       #         }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
       
+      - name: Temporarily disable branch protection - result
+        run: |
+          echo "${{ steps.disable-branch-protection.outputs.result }}"
+      
       - name: Push Commit
         if: steps.generate-notices.outputs.commit == 'true'
         uses: ad-m/github-push-action@v0.6.0
@@ -146,6 +148,7 @@ jobs:
           github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
       
       - name: Re-enable "required_pull_request_reviews" branch protection
+        id: enable-branch-protection
         if: always()
         uses: actions/github-script@v1
         with:
@@ -177,6 +180,10 @@ jobs:
         #           "required_status_checks": null,
         #           "enforce_admins": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
+      
+      - name: Re-enable branch protection - result
+        run: |
+          echo "${{ steps.enable-branch-protection.outputs.result }}
 
   job-generate-release:
     runs-on: ubuntu-latest
@@ -207,6 +214,7 @@ jobs:
         run: npm ci
 
       - name: Temporarily disable "required_pull_request_reviews" branch protection
+        id: disable-branch-protection
         if: always()
         uses: actions/github-script@v1
         with:
@@ -235,12 +243,17 @@ jobs:
         #           "required_pull_request_reviews": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
 
+      - name: Temporarily disable branch protection - result
+        run: |
+          echo "${{ steps.disable-branch-protection.outputs.result }}"
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.NEWRELIC_BOT_TOKEN }}
         run: npx semantic-release
 
       - name: Re-enable "required_pull_request_reviews" branch protection
+        id: enable-branch-protection
         if: always()
         uses: actions/github-script@v1
         with:
@@ -274,3 +287,7 @@ jobs:
         #           "required_status_checks": null,
         #           "enforce_admins": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
+      
+      - name: Re-enable branch protection - result
+        run: |
+          echo "${{ steps.enable-branch-protection.outputs.result }}
