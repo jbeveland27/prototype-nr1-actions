@@ -124,7 +124,8 @@ jobs:
               enforce_admins: null,
               required_pull_request_reviews: null
             })
-            console.log(result)
+            console.log("Result:", result)
+            return result
       #   run: |
       #     ownerWithRepo="jbeveland27/prototype-nr1-actions"
       #     branch="master"
@@ -167,7 +168,8 @@ jobs:
                 required_approving_review_count: 1
               }
             })
-            console.log(result)
+            console.log("Result:", result)
+            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -232,7 +234,8 @@ jobs:
               enforce_admins: null,
               required_pull_request_reviews: null
             })
-            console.log(result)
+            console.log("Result:", result)
+            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -274,7 +277,8 @@ jobs:
                 required_approving_review_count: 1
               }
             })
-            console.log(result)
+            console.log("Result:", result)
+            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -294,4 +298,4 @@ jobs:
       
       - name: Re-enable branch protection - result
         run: |
-          echo "${{ steps.enable-branch-protection.outputs.result }}""
+          echo "${{ steps.enable-branch-protection.outputs.result }}"
