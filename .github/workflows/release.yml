@@ -107,7 +107,7 @@ jobs:
             git add THIRD_PARTY_NOTICES.md
 
             git commit -m 'chore: update third-party manifest and notices [skip ci]'
-            git push origin ${GITHUB_REF#/refs/heads/} 
+            # git push origin ${GITHUB_REF#/refs/heads/} 
             echo "::set-output name=commit::true"
           else
             echo "No change in package.json, not regenerating third-party notices"
@@ -117,9 +117,10 @@ jobs:
         if: steps.generate-notices.outputs.commit == 'true'
         env:
           GITHUB_TOKEN: ${{ env.NEWRELIC_BOT_TOKEN }}
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+        uses: ad-m/github-push-action@v0.6.0
+        # with:
+        #   github_token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
+        #   force: true
 
   job-generate-release:
     runs-on: ubuntu-latest
