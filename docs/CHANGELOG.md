@@ -1,3 +1,11 @@
+## [1.8.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.8.0...v1.8.1) (2020-05-29)
+
+
+### Bug Fixes
+
+* remove the result step for output of github-script action ([84966f4](https://github.com/jbeveland27/prototype-nr1-actions/commit/84966f4ff6f46a9a49a6809cddc06abb6daed72b))
+* return results ([8ab9113](https://github.com/jbeveland27/prototype-nr1-actions/commit/8ab91132106e83a7389636f6de723e0654e046c7))
+
 # [1.8.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.7.0...v1.8.0) (2020-05-29)
 
 
