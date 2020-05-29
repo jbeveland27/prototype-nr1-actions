@@ -125,7 +125,6 @@ jobs:
               required_pull_request_reviews: null
             })
             console.log("Result:", result)
-            return result
       #   run: |
       #     ownerWithRepo="jbeveland27/prototype-nr1-actions"
       #     branch="master"
@@ -138,10 +137,6 @@ jobs:
       #             "enforce_admins": null,
       #             "required_pull_request_reviews": null
       #         }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
-      
-      - name: Temporarily disable branch protection - result
-        run: |
-          echo "${{ steps.disable-branch-protection.outputs.result }}"
       
       - name: Push Commit
         if: steps.generate-notices.outputs.commit == 'true'
@@ -169,7 +164,6 @@ jobs:
               }
             })
             console.log("Result:", result)
-            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -185,14 +179,12 @@ jobs:
         #           "enforce_admins": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
       
-      - name: Re-enable branch protection - result
-        run: |
-          echo "${{ steps.enable-branch-protection.outputs.result }}"
-
   job-generate-release:
     runs-on: ubuntu-latest
     needs: [job-checkout-and-build, job-generate-third-party-notices]
     steps:
+      # Checkout ref: master because previous job committed third_party_notices and
+      # we need to checkout master to pick up that commit
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
@@ -235,7 +227,6 @@ jobs:
               required_pull_request_reviews: null
             })
             console.log("Result:", result)
-            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -248,10 +239,6 @@ jobs:
         #           "enforce_admins": null,
         #           "required_pull_request_reviews": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
-
-      - name: Temporarily disable branch protection - result
-        run: |
-          echo "${{ steps.disable-branch-protection.outputs.result }}"
 
       - name: Run semantic-release
         env:
@@ -278,7 +265,6 @@ jobs:
               }
             })
             console.log("Result:", result)
-            return result
         # run: |
         #   ownerWithRepo="jbeveland27/prototype-nr1-actions"
         #   branch="master"
@@ -295,7 +281,3 @@ jobs:
         #           "required_status_checks": null,
         #           "enforce_admins": null
         #       }' "https://api.github.com/repos/$ownerWithRepo/branches/$branch/protection"
-      
-      - name: Re-enable branch protection - result
-        run: |
-          echo "${{ steps.enable-branch-protection.outputs.result }}"
