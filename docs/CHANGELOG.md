@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.5.0...v1.6.0) (2020-05-29)
+
+
+### Features
+
+* use github-script action vs curl commands for updating branch protection rules ([8506f2b](https://github.com/jbeveland27/prototype-nr1-actions/commit/8506f2b56b710a133bfbaef0766c89b45e3d3f46))
+
 # [1.5.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.4.1...v1.5.0) (2020-05-29)
 
 
