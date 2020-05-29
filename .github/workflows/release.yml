@@ -119,7 +119,7 @@ jobs:
 
   job-generate-release:
     runs-on: ubuntu-latest
-    needs: [job-checkout-and-build, job-generate-third-party-notices]
+    needs: [job-checkout-and-build]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
