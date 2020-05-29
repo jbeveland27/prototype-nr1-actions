@@ -1,3 +1,24 @@
+# [1.5.0](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.4.1...v1.5.0) (2020-05-29)
+
+
+### Bug Fixes
+
+* change env var ([32e5035](https://github.com/jbeveland27/prototype-nr1-actions/commit/32e503575a91a003640830363a257930abaa1e25))
+* release ([da604d4](https://github.com/jbeveland27/prototype-nr1-actions/commit/da604d4822963e3a2df22922c84565df17cfd5c0))
+* see if release works ([6146069](https://github.com/jbeveland27/prototype-nr1-actions/commit/6146069d2da5ea98ccf6232d02744fe17e98c9eb))
+* setting env ([1f6a2ad](https://github.com/jbeveland27/prototype-nr1-actions/commit/1f6a2ad78c6e6110837a7040bbbfa08d165b1695))
+* try again ([48e38d4](https://github.com/jbeveland27/prototype-nr1-actions/commit/48e38d49314b631f3def0ad7f067fed6a43c566e))
+* try again ([2cd1146](https://github.com/jbeveland27/prototype-nr1-actions/commit/2cd11461c49de7d31c6fe2eb36c393145f00e82f))
+* try again ([c728389](https://github.com/jbeveland27/prototype-nr1-actions/commit/c7283898f7a90790369d89621091e96458ec34b9))
+* try passing github_token as env ([2f585ce](https://github.com/jbeveland27/prototype-nr1-actions/commit/2f585cefdf65d92a6110b0160c41d241d7a0d960))
+* update with token ([3c50dce](https://github.com/jbeveland27/prototype-nr1-actions/commit/3c50dce499ec7ae37e2efbfc605454f80a6227be))
+* use disable/enable of branch protection rules ([1bbb6e7](https://github.com/jbeveland27/prototype-nr1-actions/commit/1bbb6e7facf7b62c9a8d5ad0479b55cd9aed6eeb))
+
+
+### Features
+
+* testing notice generation ([c616849](https://github.com/jbeveland27/prototype-nr1-actions/commit/c6168499c663a9b5e20a8a378267e97a80949b08))
+
 ## [1.4.1](https://github.com/jbeveland27/prototype-nr1-actions/compare/v1.4.0...v1.4.1) (2020-05-27)
 
 
