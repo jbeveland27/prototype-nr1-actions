@@ -1,0 +1,66 @@
+name: Catalog
+
+on:
+  workflow_dispatch:
+    inputs:
+      appName:
+        description: "NR1 Nerdpack Name"
+        required: true
+      version:
+        description: "Version to update"
+        required: true
+      ref:
+        description: "Commit SHA to update the submodule to"
+        required: true
+      user:
+        description: "User who initiated the deployment"
+        required: true
+jobs:
+  log-context:
+    runs-on: ubuntu-latest
+    steps:
+      # Dump all contexts
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+  job-check-workflow-dispatch-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "App Name: ${{ github.event.inputs.appName }}"
+          echo "Version: ${{ github.event.inputs.version }}"
+          echo "ref: ${{ github.event.inputs.ref }}"
+          echo "User: ${{ github.event.inputs.user }}"
+
+  job-trigger-catalog-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke nr1-catalog PR workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Generate Catalog PR
+          repo: newrelic/nr1-catalog
+          token: ${{ secrets.OPENSOURCE_BOT_TOKEN }}
+          inputs: '{ "appName": "${{ github.event.inputs.appName }}", "version": "${{ github.event.inputs.version }}", "ref": "${{ github.event.inputs.ref }}", "user": "${{ github.event.inputs.user }}" }'
