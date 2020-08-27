@@ -61,6 +61,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Generate Catalog PR
-          repo: newrelic/nr1-catalog
+          repo: jbeveland27/nr1-catalog
           token: ${{ secrets.OPENSOURCE_BOT_TOKEN }}
           inputs: '{ "appName": "${{ github.event.inputs.appName }}", "version": "${{ github.event.inputs.version }}", "ref": "${{ github.event.inputs.ref }}", "user": "${{ github.event.inputs.user }}" }'
